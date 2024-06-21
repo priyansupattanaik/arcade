@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+    <title>Welcome to Arcade🤖</title>
+  </head>
+  <body>
+    <h1 class="title">ARCADE</h1>
+    <span class="score" id="player1Score">0</span>
+    <span class="timer" id="timer">0</span>
+    <h3 class="startText" id="startText">Press spacebar to start the game</h3>
+    <div class="gameArea">
+      <div id="paddle1" class="paddle1 paddle"></div>
+      <div id="paddle2" class="paddle2 paddle"></div>
+      <div id="ball" class="ball"></div>
+      <div class="net"></div>
+    </div>
+    <img src="/assets/machine.png" alt="Arcade Pong Machine" class="bg" />
+    <div class="vignett"></div>
+    <audio src="/assets/paddle.wav" id="paddleSound"></audio>
+    <audio src="/assets/wall.wav" id="wallSound"></audio>
+    <audio src="/assets/loss.wav" id="lossSound"></audio>
+    <audio src="/assets/bgmusic.wav" id="bgMusic" autoplay loop muted></audio>
+    <footer class="footer">
+      <p>Copyright&copy; 2024 RICH. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
