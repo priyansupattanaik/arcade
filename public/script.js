@@ -42,6 +42,19 @@ document.addEventListener("keydown", function (e) {
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
 
+// Touch events for mobile support
+document.addEventListener("touchstart", function (e) {
+  if (!gameRunning) {
+    startGame();
+  }
+});
+
+document.addEventListener("touchmove", function (e) {
+  e.preventDefault(); // Prevent scrolling on touchmove
+  const touchY = e.touches[0].clientY; // Get vertical position of touch
+  movePaddle1(touchY);
+});
+
 // Unmute audio on user interaction (e.g., click)
 document.addEventListener("click", function () {
   bgMusic.muted = false;
@@ -70,6 +83,23 @@ function handleKeyDown(e) {
 
 function handleKeyUp(e) {
   keysPressed[e.key] = false;
+}
+
+function movePaddle1(touchY) {
+  // Calculate new paddle position based on touch position
+  const gameAreaRect = document
+    .querySelector(".gameArea")
+    .getBoundingClientRect();
+  paddle1Y = touchY - gameAreaRect.top - paddle1.clientHeight / 2;
+
+  // Ensure paddle stays within game area
+  if (paddle1Y < 0) {
+    paddle1Y = 0;
+  } else if (paddle1Y > gameHeight - paddle1.clientHeight) {
+    paddle1Y = gameHeight - paddle1.clientHeight;
+  }
+
+  paddle1.style.top = paddle1Y + "px";
 }
 
 function updatePaddle() {

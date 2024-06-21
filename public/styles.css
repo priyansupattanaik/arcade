@@ -128,3 +128,123 @@ body {
   text-align: center;
   padding: 10px 0;
 }
+
+@media (max-width: 768px) {
+  .gameArea {
+    margin-bottom: 40px;
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    background: rgba(7, 26, 49, 0.6);
+    top: 182px;
+    border: #919bbec7 10px solid;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    transform: perspective(1000px) rotateX(33deg) scaleX(0.54) scaleY(0.84);
+  }
+
+  .bg {
+    position: absolute;
+    height: 1000px;
+    z-index: -1;
+  }
+
+  .paddle {
+    height: 100px;
+    width: 20px;
+    background: rgba(255, 0, 0, 0.9); /* Red color for the player's paddle */
+    position: absolute;
+    top: 150px;
+  }
+
+  .paddle2 {
+    height: 100px;
+    width: 20px;
+    background: rgba(0, 0, 255, 0.9); /* Blue color for the AI paddle */
+    position: absolute;
+    top: 150px;
+    right: 0;
+  }
+
+  .ball {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 2px;
+    left: 290px;
+    top: 190px;
+    box-shadow: 4px 10px 4px rgba(0, 0, 0, 0.9);
+  }
+
+  .net {
+    position: absolute;
+    border-right: 8px rgba(255, 255, 255, 0.3) dotted;
+    height: 96%;
+    top: 2%;
+    left: calc(50% - 4px);
+  }
+
+  .title {
+    position: absolute;
+    top: 88px;
+    font-size: 26px;
+  }
+
+  .score {
+    position: absolute;
+    top: 88px;
+    left: calc(50% - 200px);
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .timer {
+    position: absolute;
+    top: 88px;
+    right: calc(50% - 200px);
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+  }
+
+  .startText {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: #222;
+    border-radius: 4px;
+    padding: 10px;
+  }
+
+  .vignett {
+    height: 100dvh;
+    width: 100dvw;
+    background: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+  }
+}

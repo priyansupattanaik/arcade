@@ -50,7 +50,7 @@ document.addEventListener("touchstart", function (e) {
 });
 
 document.addEventListener("touchmove", function (e) {
-  e.preventDefault(); // Prevent scrolling on touchmove
+  e.preventDefault(); // Prevent default touch behavior
   const touchY = e.touches[0].clientY; // Get vertical position of touch
   movePaddle1(touchY);
 });
@@ -69,6 +69,8 @@ function startGame() {
   gameLoop();
 }
 
+// ... (rest of the code remains the same) ...
+
 function gameLoop() {
   if (gameRunning) {
     updatePaddle();
@@ -86,18 +88,17 @@ function handleKeyUp(e) {
 }
 
 function movePaddle1(touchY) {
-  // Calculate new paddle position based on touch position
   const gameAreaRect = document
     .querySelector(".gameArea")
     .getBoundingClientRect();
-  paddle1Y = touchY - gameAreaRect.top - paddle1.clientHeight / 2;
+  const touchPosition = touchY - gameAreaRect.top;
+  const paddleHeight = paddle1.clientHeight;
+  const gameAreaHeight = gameAreaRect.height;
 
-  // Ensure paddle stays within game area
-  if (paddle1Y < 0) {
-    paddle1Y = 0;
-  } else if (paddle1Y > gameHeight - paddle1.clientHeight) {
-    paddle1Y = gameHeight - paddle1.clientHeight;
-  }
+  paddle1Y = Math.max(
+    0,
+    Math.min(touchPosition - paddleHeight / 2, gameAreaHeight - paddleHeight)
+  );
 
   paddle1.style.top = paddle1Y + "px";
 }
