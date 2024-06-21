@@ -21,7 +21,6 @@ let ballY = 190;
 let ballSpeedY = 2;
 let player1Score = 0;
 let gameTime = 0;
-let musicPaused = false; // Flag to track if music is paused
 
 // Game Constants
 const paddleAcceleration = 1;
@@ -34,7 +33,9 @@ const gameWidth = 600;
 document.addEventListener("keydown", function (e) {
   if (e.key === " ") {
     // Check if space bar is pressed
-    togglePauseGame();
+    if (!gameRunning) {
+      startGame();
+    }
   }
 });
 
@@ -45,22 +46,12 @@ document.addEventListener("keyup", handleKeyUp);
 document.addEventListener("touchstart", function (e) {
   if (!gameRunning) {
     startGame();
-  } else {
-    togglePauseGame();
   }
 });
 
 document.addEventListener("touchmove", function (e) {
   e.preventDefault(); // Prevent default touch behavior
   movePaddle1(e);
-});
-
-// Click event outside the game area to pause/resume
-document.addEventListener("click", function (e) {
-  const gameArea = document.querySelector(".gameArea");
-  if (!gameArea.contains(e.target)) {
-    togglePauseGame();
-  }
 });
 
 // Unmute audio on user interaction (e.g., click)
@@ -72,19 +63,16 @@ document.addEventListener("click", function () {
 function startGame() {
   gameRunning = true;
   startText.style.display = "none";
-  startText.textContent = "Press spacebar to start the game"; // Set initial text
   gameTime = 0; // Reset game time
   updateTimer();
   gameLoop();
-  bgMusic.play(); // Start background music
-  musicPaused = false; // Reset music pause flag
 }
 
 function gameLoop() {
   if (gameRunning) {
     updatePaddle();
     moveBall();
-    requestAnimationFrame(gameLoop);
+    setTimeout(gameLoop, 8);
   }
 }
 
@@ -197,33 +185,8 @@ function resetBall() {
   ballSpeedY = Math.random() > 0.5 ? 2 : -2;
 }
 
-function togglePauseGame() {
-  if (gameRunning) {
-    pauseGame();
-  } else {
-    resumeGame();
-  }
-}
-
 function pauseGame() {
   gameRunning = false;
-  startText.style.display = "block";
-  startText.textContent =
-    "Game Paused. Press spacebar or click outside to resume.";
-  if (!musicPaused) {
-    bgMusic.pause(); // Pause background music
-    musicPaused = true; // Set music pause flag
-  }
-}
-
-function resumeGame() {
-  gameRunning = true;
-  startText.style.display = "none";
-  gameLoop();
-  if (musicPaused) {
-    bgMusic.play(); // Resume background music
-    musicPaused = false; // Reset music pause flag
-  }
 }
 
 function playSound(sound) {
