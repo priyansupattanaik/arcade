@@ -51,8 +51,7 @@ document.addEventListener("touchstart", function (e) {
 
 document.addEventListener("touchmove", function (e) {
   e.preventDefault(); // Prevent default touch behavior
-  const touchY = e.touches[0].clientY; // Get vertical position of touch
-  movePaddle1(touchY);
+  movePaddle1(e);
 });
 
 // Unmute audio on user interaction (e.g., click)
@@ -68,8 +67,6 @@ function startGame() {
   updateTimer();
   gameLoop();
 }
-
-// ... (rest of the code remains the same) ...
 
 function gameLoop() {
   if (gameRunning) {
@@ -87,17 +84,13 @@ function handleKeyUp(e) {
   keysPressed[e.key] = false;
 }
 
-function movePaddle1(touchY) {
-  const gameAreaRect = document
-    .querySelector(".gameArea")
-    .getBoundingClientRect();
-  const touchPosition = touchY - gameAreaRect.top;
+function movePaddle1(e) {
+  const touchY = e.touches[0].clientY; // Get vertical position of touch relative to viewport
   const paddleHeight = paddle1.clientHeight;
-  const gameAreaHeight = gameAreaRect.height;
 
   paddle1Y = Math.max(
     0,
-    Math.min(touchPosition - paddleHeight / 2, gameAreaHeight - paddleHeight)
+    Math.min(touchY - paddleHeight / 2, gameHeight - paddleHeight)
   );
 
   paddle1.style.top = paddle1Y + "px";
